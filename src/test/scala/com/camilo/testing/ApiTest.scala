@@ -19,6 +19,7 @@ class ApiTest extends Simulation {
 
   setUp(scn.inject(
       nothingFor(10 seconds),
-      atOnceUsers(10000)
+      atOnceUsers(500),
+      rampUsers(10) over(5 seconds),
     ).protocols(httpConf))
 }
