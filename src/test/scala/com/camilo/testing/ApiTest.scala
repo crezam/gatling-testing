@@ -2,9 +2,9 @@ package com.camilo.testing
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
+import scala.concurrent.duration._
 
 class ApiTest extends Simulation {
-
 
   val httpConf = http
     .baseURL("http://localhost:8080") // Here is the root for all relative URLs
@@ -17,5 +17,8 @@ class ApiTest extends Simulation {
     .exec(http("request_1")
     .get("/api"))
 
-  setUp(scn.inject(atOnceUsers(10000)).protocols(httpConf))
+  setUp(scn.inject(
+      nothingFor(10 seconds),
+      atOnceUsers(10000)
+    ).protocols(httpConf))
 }
